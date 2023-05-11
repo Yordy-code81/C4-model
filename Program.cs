@@ -17,19 +17,25 @@ namespace c4_model_design
             const string apiSecret = "5765803b-dfa9-4620-89d7-3cb170eec12f";
 
             StructurizrClient structurizrClient = new StructurizrClient(apiKey, apiSecret);
-            Workspace workspace = new Workspace("C4 Model - Easy Store", "Sistema sample-content");
+            Workspace workspace = new Workspace("C4 Model - Technogym", "System sample-content");
             ViewSet viewSet = workspace.Views;
             Model model = workspace.Model;
 
             // 1. Diagrama de Contexto
-            SoftwareSystem librarySystem = model.AddSoftwareSystem("Easy Store", "Plataforma web donde puedes publicar y leer historias de otros usuarios regitrados pudiendo suscribirse a contenido exclusivo");
+            SoftwareSystem librarySystem = model.AddSoftwareSystem("Technogym", "Plataforma que proporciona a las personas equipos de gimnasia de la más alta calidad, junto con otros servicios como contenido y programas");
+            
+            SoftwareSystem googleSystem = model.AddSoftwareSystem("Google", "Plataforma que proporciona Technogym servicios cloud como pagos y otros");
                         
-            Person escritor = model.AddPerson("Escritor", "Usuario capaz de publicar contenido textual.");
-            Person lector = model.AddPerson("Lector", "Usuario que solo podra leer contenido y suscribirse");
+            Person deportista = model.AddPerson("Deportista", "Usuario capaz de adquirir servicios fitness y de bienestar.");
+            Person gimnasio = model.AddPerson("Organizacion health y fitness", "Organización que adquirirá equipos de alta calidad");
+            Person dev = model.AddPerson("Desarrolladores", "Acceso al mywellness cloud API o al Unity SDK");
 
             
-            lector.Uses(librarySystem, "Realiza consultas para mantenerse al tanto de las publicaciones que puede leer");
-            escritor.Uses(librarySystem, "Realiza consultas para mantenerse al tanto de los lectors que seleccionan su negocio");
+            deportista.Uses(librarySystem, "Realiza consultas para mantenerse al tanto de los servicios que se ofrecen");
+            gimnasio.Uses(librarySystem, "Realiza consultas para mantenerse al tanto de los equipos que ofrecen");
+            dev.Uses(librarySystem, "Realiza consultas para el desarrollo de los microservices");
+
+            librarySystem.Uses(googleSystem, "usa la api de google para diferentes servicios");
 
             
             SystemContextView contextView = viewSet.CreateSystemContextView(librarySystem, "Contexto", "Diagrama de contexto");
@@ -38,77 +44,134 @@ namespace c4_model_design
             contextView.AddAllPeople();
 
             // Tags
-            escritor.AddTags("Ciudadano");
-            lector.AddTags("Ciudadano");
+            deportista.AddTags("Ciudadano");
+            gimnasio.AddTags("Ciudadano");
+            dev.AddTags("Ciudadano");
             librarySystem.AddTags("SistemaLibros");
+            googleSystem.AddTags("SistemaGoogle");
 
 
             Styles styles = viewSet.Configuration.Styles;
             styles.Add(new ElementStyle("Ciudadano") { Background = "#0a60ff", Color = "#ffffff", Shape = Shape.Person });
             styles.Add(new ElementStyle("SistemaLibros") { Background = "#008f39", Color = "#ffffff", Shape = Shape.RoundedBox });
+            styles.Add(new ElementStyle("SistemaGoogle") { Background = "#f03a30", Color = "#ffffff", Shape = Shape.RoundedBox });
 
             
 
             // 2. Diagrama de Contenedores
-            Container mobileApplication =       librarySystem.AddContainer("Mobile App", "Permite a los usuarios visualizar las actividades turisticas que pueden realizar cercanas a su destino.", "Flutter");
-            Container webApplication =          librarySystem.AddContainer("Web App", "Permite a los usuarios visualizar las actividades turisticas que pueden realizar cercanas a su destino.", "Vue");
-            Container landingPage =             librarySystem.AddContainer("Landing Page", "", "Bootstrap");
-            Container pagoContext =             librarySystem.AddContainer("Pagos Context", "Bounded Context del Microservicio de pagos de suscripciones", "NodeJS (NestJS)");
-            Container historiasContext =        librarySystem.AddContainer("Post Context", "Bounded Context del Microservicio de contenido de las historias", "NodeJS (NestJS)");
-            Container userContext =             librarySystem.AddContainer("User Context", "Bounded Context del Microservicio para users", "NodeJS (NestJS)");
+            Container mobileApplication =       librarySystem.AddContainer("Mobile App", "Permite a los operadores conectarse con sus clientes", "Kotlin y Swift");
+            Container webApplication =          librarySystem.AddContainer("Web App", "Permite a los operadores conectarse con sus clientes", "Angular");
+            //Container landingPage =             librarySystem.AddContainer("Landing Page", "", "Bootstrap");
+            Container sharedContext =             librarySystem.AddContainer("Shared Context", "Bounded Context del Microservicio de Shared Kernel con elementos base o compartidos con otros bounded contexts.", "NodeJS (NestJS)");
+            Container identityContext =        librarySystem.AddContainer("Indentity Context", "Bounded Context del Microservicio de User Registry, Single-Sign-On para toda la plataforma, Authentication and Authorization Management", "NodeJS (NestJS)");
+            Container ecommerceContext =             librarySystem.AddContainer("Ecommerce Context", "Bounded Context del Microservicio Gestión de venta de productos online, en puntos de venta y venta de suscripciones, incluyendo integración con pasarela de pagos, control de deudas y vencimientos", "NodeJS (NestJS)");
+            Container inventoryContext =             librarySystem.AddContainer("Inventory Context", "Bounded Context del Microservicio Catálogo de productos y servicios, manejo de inventarios, adquisiciones de productos y servicios", "NodeJS (NestJS)");
+            Container accountsContext =             librarySystem.AddContainer("Account Context", "Bounded Context del Microservicio Información de accounts, perfiles y preferencias para usuarios individuales y perfiles para clientes business y fitness clubs", "NodeJS (NestJS)");
+            Container trainingContext =             librarySystem.AddContainer("Training Context", "Bounded Context del Microservicio Diseño, ejecución y seguimiento de planes de entrenamiento considerando por ejemplo objetivos cardiovasculares, peso, máquinas de technogym a utilizar, pesas, actividades, repeticiones y otros relacionados con training, accesibles por el usuario vía Technogym App o Mywellness", "NodeJS (NestJS)");
+            Container businessContext =             librarySystem.AddContainer("Business Context", "Bounded Context del Microservicio para Los incluidos en Premium services for smart facilities, donde varios se integran con otros bounded contexts", "NodeJS (NestJS)");
+            Container contentContext =             librarySystem.AddContainer("Content Context", "Bounded Context del Microservicio para Manejo del contenido de videos de entrenamiento, capacitación, assets de imagen, soporte de streaming para integrar en los productos de la plataforma", "NodeJS (NestJS)");
+            Container digitalContext =             librarySystem.AddContainer("Digital Context", "Bounded Context del Microservicio para Elementos de IA y ML que ofrecen asistencia en sesiones de entrenamiento vía consolas de máquinas o aplicaciones para usuarios en la plataforma.", "NodeJS (NestJS)");
+            Container dataContext =             librarySystem.AddContainer("Data Context", "Bounded Context del Microservicio para Gestión unificada de registros de actividades en los diversos productos y servicios que sirven de base para los asistentes de IA y la labor de los técnicos de mantenimiento de equipos de entrenamiento", "NodeJS (NestJS)");
             Container apiGateway =              librarySystem.AddContainer("API Gateway", "API Gateway", "Spring Boot port 8080");
-            Container database1 =               librarySystem.AddContainer("Pagos DB", "", "MySQL");
-            Container database3 =               librarySystem.AddContainer("Post DB", "", "MySQL");
-            Container database5 =               librarySystem.AddContainer("Post DB Replica", "", "MySQL");
-            Container database6 =               librarySystem.AddContainer("User DB", "", "MySQL");
+            Container database1 =               librarySystem.AddContainer("Shared DB", "", "MySQL");
+            Container database3 =               librarySystem.AddContainer("Ecommerce DB", "", "MySQL");
+            Container database5 =               librarySystem.AddContainer("Ecommerce DB Replica", "", "MySQL");
+            Container database2 =               librarySystem.AddContainer("Inventory DB", "", "MySQL");
+            Container database4 =               librarySystem.AddContainer("Account DB", "", "MySQL");
+            Container database6 =               librarySystem.AddContainer("Training DB", "", "MySQL");
+            Container database7 =               librarySystem.AddContainer("Business DB", "", "MySQL");
+            Container database8 =               librarySystem.AddContainer("Content DB", "", "MySQL");
+            Container database9 =               librarySystem.AddContainer("Digital DB", "", "MySQL");
+            Container database10 =               librarySystem.AddContainer("Data DB", "", "MySQL");
+            Container database11 =               librarySystem.AddContainer("Indentity DB", "", "MySQL");
             Container messageBus = librarySystem.AddContainer("Bus de Mensajes en Cluster de Alta Disponibilidad", "Transporte de eventos del dominio.", "RabbitMQ");
 
             
             
 
-            lector.Uses(mobileApplication, "Consulta");
-            lector.Uses(webApplication, "Consulta");
-            lector.Uses(landingPage, "Consulta");
-            escritor.Uses(mobileApplication, "Consulta");
-            escritor.Uses(webApplication, "Consulta");
-            escritor.Uses(landingPage, "Consulta");
+            deportista.Uses(mobileApplication, "Consulta");
+            deportista.Uses(webApplication, "Consulta");
+            //lector.Uses(landingPage, "Consulta");
+            gimnasio.Uses(mobileApplication, "Consulta");
+            gimnasio.Uses(webApplication, "Consulta");
+            dev.Uses(webApplication, "Consulta");
+            //escritor.Uses(landingPage, "Consulta");
                      
 
             mobileApplication.Uses(apiGateway,"API Request", "JSON/HTTPS");
             webApplication.Uses(apiGateway,"API Request", "JSON/HTTPS");
 
-            apiGateway.Uses(pagoContext,         "Request", "JSON/HTTPS");
-            apiGateway.Uses(historiasContext,   "Request", "JSON/HTTPS");
-            apiGateway.Uses(userContext,   "Request", "JSON/HTTPS");
+            apiGateway.Uses(sharedContext,         "Request", "JSON/HTTPS");
+            apiGateway.Uses(identityContext,   "Request", "JSON/HTTPS");
+            apiGateway.Uses(ecommerceContext,   "Request", "JSON/HTTPS");
+            apiGateway.Uses(inventoryContext,   "Request", "JSON/HTTPS");
+            apiGateway.Uses(accountsContext,   "Request", "JSON/HTTPS");
+            apiGateway.Uses(trainingContext,   "Request", "JSON/HTTPS");
+            apiGateway.Uses(businessContext,   "Request", "JSON/HTTPS");
+            apiGateway.Uses(contentContext,   "Request", "JSON/HTTPS");
+            apiGateway.Uses(digitalContext,   "Request", "JSON/HTTPS");
+            apiGateway.Uses(dataContext,   "Request", "JSON/HTTPS");
 
-            pagoContext.Uses(database1, "", "JDBC");
-            historiasContext.Uses(database3, "", "JDBC");
-            historiasContext.Uses(database5, "", "JDBC");
+            sharedContext.Uses(database1, "", "JDBC");
+            ecommerceContext.Uses(database3, "", "JDBC");
+            ecommerceContext.Uses(database5, "", "JDBC");
             database3.Uses(database5, "", "JDBC");
-            userContext.Uses(database6, "", "JDBC");
+            inventoryContext.Uses(database2, "", "JDBC");
+            accountsContext.Uses(database4, "", "JDBC");
+            trainingContext.Uses(database6, "", "JDBC");
+            businessContext.Uses(database7, "", "JDBC");
+            contentContext.Uses(database8, "", "JDBC");
+            digitalContext.Uses(database9, "", "JDBC");
+            dataContext.Uses(database10, "", "JDBC");
+            identityContext.Uses(database11, "", "JDBC");
             
-            pagoContext.Uses(messageBus,"Publica y consume eventos del dominio");
-            historiasContext.Uses(messageBus, "Publica y consume eventos del dominio");
-            userContext.Uses(messageBus, "Publica y consume eventos del dominio");
+            sharedContext.Uses(messageBus,"Publica y consume eventos del dominio");
+            ecommerceContext.Uses(messageBus, "Publica y consume eventos del dominio");
+            inventoryContext.Uses(messageBus, "Publica y consume eventos del dominio");
+            accountsContext.Uses(messageBus, "Publica y consume eventos del dominio");
+            trainingContext.Uses(messageBus, "Publica y consume eventos del dominio");
+            businessContext.Uses(messageBus, "Publica y consume eventos del dominio");
+            contentContext.Uses(messageBus, "Publica y consume eventos del dominio");
+            digitalContext.Uses(messageBus, "Publica y consume eventos del dominio");
+            dataContext.Uses(messageBus, "Publica y consume eventos del dominio");
+            identityContext.Uses(messageBus, "Publica y consume eventos del dominio");
+
+            identityContext.Uses(googleSystem, "");
+            digitalContext.Uses(googleSystem, "");
+            dataContext.Uses(googleSystem, "");
                         
             // Tags
             mobileApplication.AddTags("MobileApp");
             webApplication.AddTags("WebApp");
-            landingPage.AddTags("LandingPage");            
+            //landingPage.AddTags("LandingPage");            
             apiGateway.AddTags("APIGateway");
             database1.AddTags("Database");
             database3.AddTags("Database");
             database5.AddTags("Database");
             database6.AddTags("Database");
-            pagoContext.AddTags("BoundedContext");            
-            historiasContext.AddTags("BoundedContext");            
-            userContext.AddTags("BoundedContext");
+            database2.AddTags("Database");
+            database4.AddTags("Database");
+            database7.AddTags("Database");
+            database8.AddTags("Database");
+            database9.AddTags("Database");
+            database10.AddTags("Database");
+            database11.AddTags("Database");
+            sharedContext.AddTags("BoundedContext");            
+            ecommerceContext.AddTags("BoundedContext");            
+            inventoryContext.AddTags("BoundedContext");
+            accountsContext.AddTags("BoundedContext");
+            trainingContext.AddTags("BoundedContext");
+            businessContext.AddTags("BoundedContext");
+            contentContext.AddTags("BoundedContext");
+            digitalContext.AddTags("BoundedContext");
+            dataContext.AddTags("BoundedContext");
+            identityContext.AddTags("BoundedContext");
             messageBus.AddTags("MessageBus");
 
 
             styles.Add(new ElementStyle("MobileApp") { Background = "#9d33d6", Color = "#ffffff", Shape = Shape.MobileDevicePortrait, Icon = "" });
             styles.Add(new ElementStyle("WebApp") { Background = "#9d33d6", Color = "#ffffff", Shape = Shape.WebBrowser, Icon = "" });
-            styles.Add(new ElementStyle("LandingPage") { Background = "#929000", Color = "#ffffff", Shape = Shape.WebBrowser, Icon = "" });
+            //styles.Add(new ElementStyle("LandingPage") { Background = "#929000", Color = "#ffffff", Shape = Shape.WebBrowser, Icon = "" });
             styles.Add(new ElementStyle("APIGateway") { Shape = Shape.RoundedBox, Background = "#0000ff", Color = "#ffffff", Icon = "" });
             styles.Add(new ElementStyle("Database") { Shape = Shape.Cylinder, Background = "#ff0000", Color = "#ffffff", Icon = "" });
             styles.Add(new ElementStyle("BoundedContext") { Shape = Shape.Hexagon, Background = "#facc2e", Icon = "" });
@@ -120,7 +183,7 @@ namespace c4_model_design
             containerView.AddAllElements(); 
             
             //3. Diagrama de Componentes -> post
-            Component domainLayerHistoriasContext = historiasContext.AddComponent("Domain Layer", "Domino del contexto", "Spring Boot(NestJS)");
+            /*Component domainLayerHistoriasContext = historiasContext.AddComponent("Domain Layer", "Domino del contexto", "Spring Boot(NestJS)");
             Component historiaController = historiasContext.AddComponent("History Controller", "REST API endpoint de historias", "Spring Boot");
             Component historiaApplicationService = historiasContext.AddComponent("HistorysAplication Service", "Prove metodos para los datos de hisotrias", "Spring Boot");
             Component historiaRepository=historiasContext.AddComponent("History Repository", "Información de historias", "Spring Boot");
@@ -209,7 +272,7 @@ namespace c4_model_design
             pagoComponentView.Add(apiGateway);   
             pagoComponentView.Add(webApplication);
             pagoComponentView.Add(database1);
-            pagoComponentView.AddAllComponents();          
+            pagoComponentView.AddAllComponents();  */        
 
             structurizrClient.UnlockWorkspace(workspaceId);
             structurizrClient.PutWorkspace(workspaceId, workspace);

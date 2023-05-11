@@ -51,3 +51,21 @@ D:\Desarrollo\practice-c4model\easy-store-c4model\c4-model-design\obj\Debug\netc
 D:\Desarrollo\practice-c4model\easy-store-c4model\c4-model-design\obj\Debug\netcoreapp3.1\c4-model-design.dll
 D:\Desarrollo\practice-c4model\easy-store-c4model\c4-model-design\obj\Debug\netcoreapp3.1\c4-model-design.pdb
 D:\Desarrollo\practice-c4model\easy-store-c4model\c4-model-design\obj\Debug\netcoreapp3.1\c4-model-design.genruntimeconfig.cache
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\bin\Debug\netcoreapp3.1\c4-model-design.exe
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\bin\Debug\netcoreapp3.1\c4-model-design.deps.json
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\bin\Debug\netcoreapp3.1\c4-model-design.runtimeconfig.json
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\bin\Debug\netcoreapp3.1\c4-model-design.runtimeconfig.dev.json
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\bin\Debug\netcoreapp3.1\c4-model-design.dll
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\bin\Debug\netcoreapp3.1\c4-model-design.pdb
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\bin\Debug\netcoreapp3.1\Structurizr.Client.dll
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\bin\Debug\netcoreapp3.1\Structurizr.Core.dll
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\obj\Debug\netcoreapp3.1\c4-model-design.csproj.AssemblyReference.cache
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\obj\Debug\netcoreapp3.1\c4-model-design.GeneratedMSBuildEditorConfig.editorconfig
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\obj\Debug\netcoreapp3.1\c4-model-design.AssemblyInfoInputs.cache
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\obj\Debug\netcoreapp3.1\c4-model-design.AssemblyInfo.cs
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\obj\Debug\netcoreapp3.1\c4-model-design.csproj.CoreCompileInputs.cache
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\obj\Debug\netcoreapp3.1\c4-model-design.csproj.CopyComplete
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\obj\Debug\netcoreapp3.1\c4-model-design.dll
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\obj\Debug\netcoreapp3.1\c4-model-design.pdb
+D:\OneDrive - Universidad Peruana de Ciencias\2023-I\Arquitectura-emergente\parcial\easy-store-c4model-main\obj\Debug\netcoreapp3.1\c4-model-design.genruntimeconfig.cache
